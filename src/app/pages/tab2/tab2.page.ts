@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonSegment, IonSegmentButton, IonLabel, SegmentChangeEventDetail, IonList, IonItem, IonInfiniteScroll, IonInfiniteScrollContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../../explore-container/explore-container.component';
-import { IonSegmentCustomEvent } from '@ionic/core';
 import { NgFor } from '@angular/common';
 import { ArticlesComponent } from "../../components/articles/articles.component";
 import { Article } from 'src/app/interfaces';
 import { NewsService } from 'src/app/services/news.service';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+
 
 
 
