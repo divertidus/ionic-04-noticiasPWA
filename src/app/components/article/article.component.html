@@ -1,0 +1,50 @@
+<ion-card>
+
+
+  <!-- Solo intentará mostrar la imagen si existe gracias al *ngIf -->
+  <ion-img *ngIf="articulo.urlToImage" [src]="articulo.urlToImage" (click)="onClick()" />
+
+  <ion-card-subtitle class="ion-margin">
+
+    <ion-row>
+
+      <ion-col size="3" class="ion-align-self-center">
+        <span class="text-primary">{{indiceArticulo}}</span>
+      </ion-col>
+
+      <ion-col size="7" class="ion-align-self-center">
+        <span class="article-source-name">{{articulo.source.name}}</span>
+      </ion-col>
+
+      <ion-col size="2" class="ion-align-self-center">
+        <!--  [id]="'abrir-action-sheet'+ indiceArticulo" -->
+        <!-- Mejor la opcion de llamar a un metodo para mostrar el action Sheet -->
+        <!-- Ahorra todos los problema que tenía -->
+        <ion-button fill="clear" shape="round" (click)="mostrarIndice()" (click)="abrirMenuOpcionesActionSheet()">
+          <ion-icon slot="start" name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+        <!-- [trigger]="'abrir-action-sheet'+ indiceArticulo" -->
+
+        <!-- ESTO ANTES, CON LOS BOTONES EN VEZ DE ACCION -->
+        <!--  <ion-action-sheet class="my-custom-class" [buttons]="actionSheetButtons" -->
+        <!-- <ion-action-sheet class="my-custom-class"></ion-action-sheet> -->
+
+
+      </ion-col>
+
+    </ion-row>
+
+  </ion-card-subtitle>
+
+  <ion-card-title class="ion-padding-horizontal ion-margin-bottom" (click)="onClick()">
+    {{articulo.title}}
+  </ion-card-title>
+
+
+
+  <ion-card-content *ngIf="articulo.description">
+
+    <p>{{articulo.description}}</p>
+  </ion-card-content>
+
+</ion-card>

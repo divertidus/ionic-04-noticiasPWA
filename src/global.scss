@@ -1,0 +1,164 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import '@ionic/angular/css/palettes/dark.system.css';
+
+
+.text-primary {
+    color: var(--ion-color-primary) // con var y parentesis, puedo poner el nombre de la variable que sea para el color. En este caso primary
+}
+
+.article-source-name {
+    font-size: 12px;
+    color: var(--ion-color-medium-shade)
+}
+
+/*
+En Ionic 8, las variables de color predefinidas están incorporadas en el core del framework y no son inmediatamente visibles en los archivos de su proyecto. Sin embargo, hay varias formas de consultarlas:
+
+Inspección en el navegador:
+
+Abra su aplicación en el navegador
+Abra las herramientas de desarrollo (F12 o clic derecho > Inspeccionar)
+En la pestaña "Elements", seleccione el elemento <html> o <body>
+En la pestaña "Styles", desplácese hasta encontrar el selector :root
+Allí verá todas las variables CSS de Ionic, incluyendo los colores
+
+
+Documentación de Ionic:
+
+Visite la documentación oficial de Ionic sobre temas
+Busque la sección "Default Colors" o "CSS Variables"
+Allí encontrará una lista completa de las variables de color predefinidas
+
+
+Uso en el código:
+
+Como ya ha notado, puede usar estas variables en su CSS/SCSS:
+cssCopy.mi-clase {
+  color: var(--ion-color-primary);
+}
+
+También puede usarlas en atributos HTML de Ionic:
+htmlCopy<ion-button color="primary">Botón</ion-button>
+
+
+
+Consola del navegador:
+
+Abra la consola del navegador en las herramientas de desarrollo
+Ejecute este código JavaScript para ver todas las variables CSS:
+javascriptCopyconsole.log(getComputedStyle(document.documentElement));
+
+Busque las que comienzan con --ion-color-
+
+
+
+Las variables de color principales en Ionic incluyen:
+
+--ion-color-primary
+--ion-color-secondary
+--ion-color-tertiary
+--ion-color-success
+--ion-color-warning
+--ion-color-danger
+--ion-color-light
+--ion-color-medium
+--ion-color-dark
+
+Cada una de estas tiene variantes como -rgb, -contrast, -shade, y -tint.
+
+
+EN EL NAVEGADOR TRAS ELEMENTS Y HTML ENCUENTRO
+
+:root
+:root {
+    --ion-color-primary: #0054e9;
+    --ion-color-primary-rgb: 0, 84, 233;
+    --ion-color-primary-contrast: #fff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #004acd;
+    --ion-color-primary-tint: #1a65eb;
+    --ion-color-secondary: #0163aa;
+    --ion-color-secondary-rgb: 1, 99, 170;
+    --ion-color-secondary-contrast: #fff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #015796;
+    --ion-color-secondary-tint: #1a73b3;
+    --ion-color-tertiary: #6030ff;
+    --ion-color-tertiary-rgb: 96, 48, 255;
+    --ion-color-tertiary-contrast: #fff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #542ae0;
+    --ion-color-tertiary-tint: #7045ff;
+    --ion-color-success: #2dd55b;
+    --ion-color-success-rgb: 45, 213, 91;
+    --ion-color-success-contrast: #000;
+    --ion-color-success-contrast-rgb: 0, 0, 0;
+    --ion-color-success-shade: #28bb50;
+    --ion-color-success-tint: #42d96b;
+    --ion-color-warning: #ffc409;
+    --ion-color-warning-rgb: 255, 196, 9;
+    --ion-color-warning-contrast: #000;
+    --ion-color-warning-contrast-rgb: 0, 0, 0;
+    --ion-color-warning-shade: #e0ac08;
+    --ion-color-warning-tint: #ffca22;
+    --ion-color-danger: #c5000f;
+    --ion-color-danger-rgb: 197, 0, 15;
+    --ion-color-danger-contrast: #fff;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
+    --ion-color-danger-shade: #ad000d;
+    --ion-color-danger-tint: #cb1a27;
+    --ion-color-light: #f4f5f8;
+    --ion-color-light-rgb: 244, 245, 248;
+    --ion-color-light-contrast: #000;
+    --ion-color-light-contrast-rgb: 0, 0, 0;
+    --ion-color-light-shade: #d7d8da;
+    --ion-color-light-tint: #f5f6f9;
+    --ion-color-medium: #636469;
+    --ion-color-medium-rgb: 99, 100, 105;
+    --ion-color-medium-contrast: #fff;
+    --ion-color-medium-contrast-rgb: 255, 255, 255;
+    --ion-color-medium-shade: #57585c;
+    --ion-color-medium-tint: #737478;
+    --ion-color-dark: #222428;
+    --ion-color-dark-rgb: 34, 36, 40;
+    --ion-color-dark-contrast: #fff;
+    --ion-color-dark-contrast-rgb: 255, 255, 255;
+    --ion-color-dark-shade: #1e2023;
+    --ion-color-dark-tint: #383a3e;
+}
+*/

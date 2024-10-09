@@ -1,0 +1,31 @@
+<ion-header [translucent]="true" mode="ios" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      Las Noticias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" mode="ios" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title size="large">Las Noticias</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Basicamente a nuestro componente articles ,le pasamos al llamarlo el "arrayArticulos" que como en el 
+  componente tenemos la variable   @Input() arrayArticulosEnComponente: Article[] = []
+  se la asignamos pasándoselo como vemos en  <app-articles [arrayArticulosEnComponente]="arrayArticulos">
+    Vease que he puesto ese nombre largo de arrayArticulosEnComponente para distinguirlos ahora. Pero podría llamarse igual en todas partes
+    y quedar como [arrayArticulos]="arrayArticulos" obviamente renombrando en el ts de componentes -->
+  <app-articles [arrayArticulosEnComponente]="arrayArticulos"></app-articles>
+
+  <ion-infinite-scroll  (ionInfinite)="loadData()">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-list>
+
+  </ion-list>
+</ion-content>

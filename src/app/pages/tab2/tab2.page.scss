@@ -1,0 +1,6 @@
+//Con esto lo que hacemos es quitar la barra inferior del scroll en el ion segment para la tab2
+::-webkit-scrollbar,*::-webkit-scrollbar {
+    display: none !important;
+    overflow: hidden
+}
+
