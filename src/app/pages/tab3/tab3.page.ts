@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonSegmentButton, IonLabel, IonSegment } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonSegmentButton, IonLabel, IonSegment, IonButton } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../../explore-container/explore-container.component';
 import { StorageService } from 'src/app/services/storage.service';
 import { Article } from 'src/app/interfaces';
 import { ArticlesComponent } from "../../components/articles/articles.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: true,
-  imports: [IonSegment, IonLabel, IonSegmentButton, IonInfiniteScrollContent, IonInfiniteScroll, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, ArticlesComponent],
+  imports: [IonButton,RouterModule, IonSegment, IonLabel, IonSegmentButton, IonInfiniteScrollContent, IonInfiniteScroll, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, ArticlesComponent],
 })
 export class Tab3Page {
 

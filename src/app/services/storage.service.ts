@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Storage, StorageConfig } from '@ionic/storage-angular';
+import { Storage } from '@ionic/storage-angular';
 import { Article } from '../interfaces';
+import { auth } from '../firebase.config'; // Importa la configuración
 
 
 @Injectable({

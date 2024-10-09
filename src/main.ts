@@ -7,10 +7,10 @@ import { AppComponent } from './app/app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { importProvidersFrom, isDevMode } from '@angular/core';
 import { provideServiceWorker } from '@angular/service-worker';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 // Configuración de almacenamiento
-
-
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, // Configuración de RouteReuseStrategy
@@ -18,11 +18,27 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)), // Configuración del router
     provideHttpClient(), // Configuración del HttpClient
     importProvidersFrom(IonicStorageModule.forRoot()), provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          }), // Configuración del almacenamiento local
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
+    }), // Configuración del almacenamiento local
   ],
 }).catch((err) => console.error(err));
+
+
+/*Confir Firebase */
+const firebaseConfig = {
+  apiKey: "AIzaSyCa2RWrqKQr-XB7o8XHsr8NOW9QPcfPImY",
+  authDomain: "TU_AUTH_DOMAIN",
+  projectId: "noticiaspwa-7291e",
+  storageBucket: "noticiaspwa-7291e.appspot.com",
+  messagingSenderId: "418353973914",
+  appId: "TU_APP_ID",
+};
+/*Cosas inicio sesion y firebase*/
+provideFirebaseApp(() => initializeApp(firebaseConfig));
+provideAuth(() => getAuth());
+
+
 /*
 Guía Esencial: Servicio API en Ionic 8 con Componentes Standalone
 Pasos 100% Necesarios
