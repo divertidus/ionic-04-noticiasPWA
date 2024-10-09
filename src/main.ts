@@ -5,7 +5,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, isDevMode } from '@angular/core';
+import { provideServiceWorker } from '@angular/service-worker';
 
 // Configuración de almacenamiento
 
@@ -16,7 +17,10 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(), // Configuración de Ionic Angular
     provideRouter(routes, withPreloading(PreloadAllModules)), // Configuración del router
     provideHttpClient(), // Configuración del HttpClient
-    importProvidersFrom(IonicStorageModule.forRoot()), // Configuración del almacenamiento local
+    importProvidersFrom(IonicStorageModule.forRoot()), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }), // Configuración del almacenamiento local
   ],
 }).catch((err) => console.error(err));
 /*
