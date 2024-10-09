@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators'; // Operador para transformar datos en un O
 import { storedArticlesByCategory } from '../data/mock-news';
 
 
-
 // Extraemos apiKey y apiUrl de las variables de entorno
 const apiKey = environment.apiKey;
 const apiUrl = environment.apiURL;
@@ -23,7 +22,22 @@ export class NewsService {
   // Constructor del servicio, inyectamos HttpClient
   constructor(private http: HttpClient) { }
 
-  // Información local, que simula la respuesta de la API
+  /* Método genérico para ejecutar consultas HTTP
+     T es un tipo genérico que se especificará cuando se llame al método
+     endpoint es la parte final de la URL que varía según la consulta */
+  private executeQuery<T>(endpoint: string) {
+    console.log('Peticion HTTP realizada desde executeQuery');
+    return this.http.get<T>(`${apiUrl}${endpoint}`, {
+      params: {
+        apiKey: apiKey, // Añadimos la apiKey como parámetro
+        country: 'us', // Configuramos el país para las noticias
+      }
+    })
+  }
+
+  /* Objeto para almacenar artículos por categoría y página
+     Esto evita hacer peticiones HTTP repetidas para información ya obtenida */
+  //private articulosPorCategoriaYPagina: ArticulosPorCategoriaYPagina = {}
   private articulosPorCategoriaYPagina: ArticulosPorCategoriaYPagina | any = storedArticlesByCategory;
 
   // Método para obtener los titulares principales, que será de business siempre
@@ -45,7 +59,7 @@ export class NewsService {
       return of(this.articulosPorCategoriaYPagina[category].articulos);
     } else {
       console.log(`No existen artículos locales para la categoría ${category}`);
-      return of([]);  // Si no existe la categoría, devuelve un array vacío
+      return of([]);  // Si no existe la categoría en los datos locales, devuelve un array vacío
     }
   }
 
