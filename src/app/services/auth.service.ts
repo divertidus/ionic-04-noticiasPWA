@@ -1,26 +1,65 @@
-// src/app/services/auth.service.ts
-
 import { Injectable } from '@angular/core';
-import { auth } from '../firebase.config'; // Importa la configuración
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase.config'; // Importa la instancia de autenticación de Firebase
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from 'firebase/auth'; // Importa funciones necesarias de Firebase Auth
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  user: any = null; // Variable para almacenar el usuario actual
 
-  // Método para registrar un nuevo usuario
-  registerUser(email: string, password: string) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  constructor() {
+    // Inicia la escucha de cambios en el estado de autenticación al crear el servicio
+    this.checkAuthState();
   }
 
-  // Método para iniciar sesión
-  loginUser(email: string, password: string) {
-    return signInWithEmailAndPassword(auth, email, password);
+  // Método para iniciar sesión con Google
+  async signInWithGoogle() {
+    const provider = new GoogleAuthProvider(); // Crea una instancia del proveedor de autenticación de Google
+
+    try {
+      // Intenta iniciar sesión con una ventana emergente
+      const result = await signInWithPopup(auth, provider);
+      this.user = result.user; // Actualiza el estado del usuario con la información del usuario autenticado
+      console.log('Usuario autenticado con Google:', this.user);
+      return this.user;
+    } catch (error) {
+      console.error('Error al iniciar sesión con Google:', error);
+      throw error; // Propaga el error para que pueda ser manejado por el componente que llama a este método
+    }
+  }
+
+  // Método para verificar y mantener el estado de autenticación
+  checkAuthState() {
+    // Establece un observador para cambios en el estado de autenticación
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.user = user; // Actualiza el estado si hay un usuario autenticado
+        console.log('Sesión activa:', this.user);
+      } else {
+        this.user = null; // Limpia el estado si no hay usuario autenticado
+        console.log('No hay sesión activa');
+      }
+    });
+  }
+
+  // Método para cerrar sesión
+  async signOut() {
+    try {
+      await auth.signOut(); // Cierra la sesión en Firebase
+      this.user = null;  // Limpia el estado del usuario
+      console.log('Usuario desconectado');
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   }
 }
+
+// Nota importante: La persistencia de la sesión se mantiene gracias al método checkAuthState().
+// Este método utiliza onAuthStateChanged, que escucha continuamente los cambios en el estado de autenticación.
+// Cuando el usuario inicia sesión, Firebase almacena el token de autenticación en el almacenamiento local del navegador.
+// onAuthStateChanged detecta este token almacenado, permitiendo que la sesión persista incluso al cambiar de ventana o recargar la página.
 
 
 

@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonSegmentButton, IonLabel, IonSegment, IonButton } from '@ionic/angular/standalone';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonInfiniteScroll, IonInfiniteScrollContent, IonSegmentButton, IonLabel, IonSegment, IonButton, IonTabButton, IonIcon } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../../explore-container/explore-container.component';
 import { StorageService } from 'src/app/services/storage.service';
 import { Article } from 'src/app/interfaces';
 import { ArticlesComponent } from "../../components/articles/articles.component";
 import { RouterModule } from '@angular/router';
+import { sadOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
   standalone: true,
-  imports: [IonButton,RouterModule, IonSegment, IonLabel, IonSegmentButton, IonInfiniteScrollContent, IonInfiniteScroll, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, ArticlesComponent],
+  imports: [IonIcon, IonTabButton, IonButton, RouterModule, IonSegment, IonLabel, IonSegmentButton, IonInfiniteScrollContent, IonInfiniteScroll, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, ArticlesComponent],
 })
 export class Tab3Page {
 
@@ -21,12 +22,25 @@ export class Tab3Page {
   LO MAS IMPORTANTE EL loadFvourites en el init de dicho servicio, isno no se ve al refrescar la pagina en tab3*/
 
 
-  constructor(private storageService: StorageService) {
+  constructor(private storageService: StorageService, private cd: ChangeDetectorRef) {
   }
 
   /*Los getter gracias a Angular mantienen monitorizados los objetos y reflejan sus cambios*/
   get articulosFavoritos(): Article[] {
+    
     return this.storageService.getLocalArticles();
+  }
+
+  ionViewWillEnter() {
+    console.log("me ejecuto cada vez que se entra en la vista?");
+    
+    // Intenta manipular directamente el DOM para forzar el título a reaparecer
+    const titleElement = document.querySelector('ion-title');
+    if (titleElement) {
+      titleElement.innerHTML = 'Favoritos'; // Forzar la actualización del contenido del título
+    }
+  
+    this.cd.detectChanges(); // Forzar la detección de cambios
   }
 
 
